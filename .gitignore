@@ -1,0 +1,40 @@
+
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Visual Studio Code
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+application-local.properties
+application-prod.properties
+*.jks
+*.p12
+*.pem
+*.key
+
+# Archivos temporales
+*.tmp
+*.bak

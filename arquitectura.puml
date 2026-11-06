@@ -1,0 +1,41 @@
+
+@startuml
+title Arquitectura del Sistema de Pedidos - Spring Boot
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+left to right direction
+
+actor "Usuario" as Usuario
+
+package "Sistema de Pedidos - Spring Boot" {
+    component "Spring Security\nAutenticación, Roles y CSRF" as Security
+    component "Spring MVC\nControladores Web y REST" as MVC
+    component "Vistas JSP\nPedidos y Reportes" as JSP
+    component "PedidoService\nLógica de negocio" as Service
+    component "Spring Data JPA\nPedidoRepository" as JPA
+    component "Spring JDBC\nPedidoReporteJdbcRepository" as JDBC
+    component "InventarioRestClient" as Client
+}
+
+database "MySQL\npedidosdb" as MySQL
+
+package "Sistema externo - WildFly" {
+    component "inventario-service\nJakarta EE" as Inventario
+}
+
+database "SQL Server\nInventario" as SQLServer
+
+Usuario --> Security : HTTP
+Security --> MVC : Solicitud autorizada
+MVC --> JSP : Renderiza HTML
+MVC --> Service : Operaciones de pedidos
+Service --> JPA : Persistencia
+Service --> JDBC : Consultas y reportes
+JPA --> MySQL
+JDBC --> MySQL
+Service --> Client : Consulta inventario
+Client --> Inventario : HTTP / JSON
+Inventario --> SQLServer
+
+@enduml
